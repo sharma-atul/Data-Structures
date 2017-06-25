@@ -9,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
    
  * Creates a thread pool that reuses a fixed number of threads to execute tasks.
  * 
- * Can be at most size threads active processing tasks.
+ * Can be at most N size threads active processing tasks.
  * 
  *
  * If all threads are active and processing, additional tasks submitted are queued
@@ -54,9 +54,9 @@ public class ThreadPool {
            throw new Exception("ThreadPool has been shutDown, no further tasks can be added");
  
         /*
-      * Add task in sharedQueue,
-      * and notify all waiting threads that task is available.  
-            */
+         * Add task in sharedQueue,
+         * and notify all waiting threads that task is available.  
+         */
         System.out.println("task has been added.");
         this.taskQueue.put(task);
     }

@@ -20,17 +20,9 @@ public class DynamicThreadPool {
 	private ThreadPoolExecutor threadPoolExecutor;
 	
 	public DynamicThreadPool(int maxSize, int keepAliveTime){
-		if(maxSize < 0){
-			this.corePoolSize = 1;
-			this.maximumPoolSize = 1;
-		}
-		else if(keepAliveTime < 0){
-			this.keepAliveTime= 60;
-		}
-		queue = new LinkedBlockingQueue<Runnable>();
+		validateParameters(maxSize, keepAliveTime);
 		
-		corePoolSize = maxSize;
-		maximumPoolSize = maxSize;
+		queue = new LinkedBlockingQueue<Runnable>();
 
 		threadPoolExecutor = new ThreadPoolExecutor(
 			    corePoolSize, maximumPoolSize, 
@@ -40,6 +32,8 @@ public class DynamicThreadPool {
 
 		threadPoolExecutor.allowCoreThreadTimeOut(true);
 	}
+
+
 	
 	/**
      * Execute the task, task must be of Runnable type.
@@ -67,5 +61,42 @@ public class DynamicThreadPool {
     	}
     	
     }
+    
+    
+    /**
+     * Helper methods
+     * 
+     */
+	private void validateParameters(int maxSize, int keepAliveTime) {
+		if(validateSize(maxSize)){
+			corePoolSize = maxSize;
+			maximumPoolSize = maxSize;
+			this.keepAliveTime = keepAliveTime;
+		}
+		if(validateKeepAlive(keepAliveTime)){
+			this.keepAliveTime = keepAliveTime;
+		}
+	}
+
+	private boolean validateSize(int maxSize) {
+		if(maxSize < 0){
+			this.corePoolSize = 1;
+			this.maximumPoolSize = 1;
+			System.out.println("Invalid value for thread pool size, using default 1.");
+			return false;
+		}
+
+		return true;
+	}
+	
+	private boolean validateKeepAlive(int keepAlive){
+		if(keepAlive < 0){
+			this.keepAliveTime = 60;
+			System.out.println("Invalid value for max thread lifetime, using default " + 
+					this.keepAliveTime+ " seconds.");
+			return false;
+		}
+		return true;
+	}
 
 }

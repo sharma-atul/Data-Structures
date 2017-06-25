@@ -39,6 +39,7 @@ public class ReentrantReadWriteLock implements ReadWriteLockIntf{
 		return INSTANCE;
 	}
 
+	
 	/**
 	 * PUBLIC METHODS
 	 */
@@ -174,9 +175,6 @@ public class ReentrantReadWriteLock implements ReadWriteLockIntf{
 		return getReadAccessCount.intValue();
 	}
 
-
-
-
 	private boolean isReaderThread(Thread callingThread){
 		return readThreads.get(callingThread) != null;
 	}
@@ -204,13 +202,5 @@ public class ReentrantReadWriteLock implements ReadWriteLockIntf{
 	 */
 	private synchronized boolean areWriteRequests(){
 		return numWriteRequests > 0;
-	}
-
-	/**
-	 * Check wherther there are any current threads requesting write access
-	 * @return
-	 */
-	private synchronized boolean areWriters(){
-		return numWriters > 0;
 	}
 }
