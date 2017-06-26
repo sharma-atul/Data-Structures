@@ -29,6 +29,10 @@ public class StringUtil
 	    return builder.toString();
 	}
 	
+	
+	/**
+	*http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/
+	*/
 	public static List<String> wordBreak(String s, Set<String> dict) {
 	    //create an array of ArrayList<String>
 	    List<String> dp[] = new ArrayList[s.length()+1];
