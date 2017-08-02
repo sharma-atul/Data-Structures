@@ -37,51 +37,18 @@ public class LinkedList<T>{
 	
 	public boolean remove(T val)
 	{
+		if(_count == 0) return false;
 		boolean $ret = false;
 		
-		if(_count == 0)
-		{
-			return $ret;
-		}
-		else
-		{
-			Node<T> currentNode = _head;
-			Node<T> previousNode = null;
-			
-			while(currentNode != null)
-			{
-				if(currentNode.value.equals(val))
-				{
-					//removing the head
-					if(_head == currentNode)
-					{
-						_head = _head.next;
-						currentNode.next = null;
-					}
-					
-					//otherwise removing element in the list
-					else
-					{
-						Node<T> nextNode = currentNode.next;
-						previousNode = currentNode;
-						previousNode.next = nextNode;
-
-						//not the last element
-						if(nextNode != null)
-						{	
-							currentNode.next = null;
-						}
-						else //removing the tail
-						{
-							_tail = previousNode;
-						}
-					}
-					_count--;
-					$ret = true;	
-				}
-				previousNode = currentNode;
-				currentNode = currentNode.next;
-			}
+		Node<T> pointer = _head;
+		while(pointer.next != null && pointer != null){
+			if(pointer.next.value.equals(val)){
+				$ret = true;
+				pointer.next = pointer.next.next;
+				_count--;
+			}else{
+				pointer = pointer.next;
+			}	
 		}
 		return $ret;
 	}
@@ -94,9 +61,8 @@ public class LinkedList<T>{
 	    Node<T> currentNode = node;
 	    Node<T> previousNode = null;
 	    Node<T> nextNode = null;
-
-	    while (currentNode != null) 
-	    {
+//a->b->c
+	    while (currentNode != null){
 	        nextNode = currentNode.next;
 	        currentNode.next = previousNode;
 	        previousNode = currentNode;

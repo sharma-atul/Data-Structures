@@ -73,7 +73,8 @@ public class ReentrantReadWriteLock implements ReadWriteLockIntf{
 			//if this thread has only one remaining read access
 			readThreads.remove(callingThread); 
 		}
-		else { //decrement the number of read access this thread has
+		else { 
+			//decrement the number of read access this thread has
 			readThreads.put(callingThread, (accessCount -1)); 
 		}
 		//notify those who might be waiting

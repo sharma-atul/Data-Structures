@@ -37,7 +37,7 @@ public class ThreadPool {
  
         //Create and start size number of threads.
         for(int i=1; i<=size; i++){
-           PoolWorkerThread PoolWorkerThread=new PoolWorkerThread(taskQueue,this);
+           PoolWorkerThread PoolWorkerThread = new PoolWorkerThread(taskQueue,this);
            PoolWorkerThread.setName("Thread-"+i);
            System.out.println("Thread-"+i +" created in ThreadPool.");
            PoolWorkerThread.start();   //start thread

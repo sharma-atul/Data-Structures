@@ -167,8 +167,8 @@ public class ArrayAlgorithms {
 		if (a.length < 2)
 			return a;
 		
-		int i = 0;
-		int j = 1;
+		int i = 0; //last unique number seen.
+		int j = 1; //running pointer
 		
 		while (j < a.length)
 		{
@@ -185,9 +185,8 @@ public class ArrayAlgorithms {
 				j++;
 			}
 		}
-		
-		int[] b = Arrays.copyOf(a, j+1);
-		return b;
+
+		return Arrays.copyOf(a, j+1);
 	}
 	
 	

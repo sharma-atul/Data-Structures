@@ -48,7 +48,6 @@ public class ReadWriteLock implements ReadWriteLockIntf{
 		}
 		numWriteRequests--;
 		numWriters++;
-
 	}
 
 	/**
